@@ -1,12 +1,15 @@
 import { randomBytes } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import path from "node:path";
 
 import { computeTotals, validateInvoice } from "@/lib/validation";
 import type { Invoice, InvoiceInput, InvoiceStatus, ValidationErrors } from "@/types/invoice";
 
-const DATA_DIR = path.join(process.cwd(), "data");
+const DATA_DIR =
+  process.env.NODE_ENV === "production" ? path.join(tmpdir(), "invoxpress-data") : path.join(process.cwd(), "data");
 const DATA_FILE = path.join(DATA_DIR, "invoices.json");
+const SEED_FILE = path.join(process.cwd(), "data", "invoices.json");
 
 function createId(): string {
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -20,37 +23,42 @@ async function ensureDataFile() {
   try {
     await readFile(DATA_FILE, "utf-8");
   } catch {
-    const sample: Invoice[] = [
-      {
-        id: "RT3080",
-        createdAt: "2026-04-21",
-        paymentDue: "2026-05-20",
-        currency: "USD",
-        description: "Website redesign",
-        paymentTerms: 30,
-        clientName: "Jensen Huang",
-        clientEmail: "jensen@example.com",
-        status: "pending",
-        senderAddress: {
-          street: "19 Union Terrace",
-          city: "Lagos",
-          postCode: "100001",
-          country: "Nigeria",
+    try {
+      const seed = await readFile(SEED_FILE, "utf-8");
+      await writeFile(DATA_FILE, seed, "utf-8");
+    } catch {
+      const sample: Invoice[] = [
+        {
+          id: "RT3080",
+          createdAt: "2026-04-21",
+          paymentDue: "2026-05-20",
+          currency: "USD",
+          description: "Website redesign",
+          paymentTerms: 30,
+          clientName: "Jensen Huang",
+          clientEmail: "jensen@example.com",
+          status: "pending",
+          senderAddress: {
+            street: "19 Union Terrace",
+            city: "Lagos",
+            postCode: "100001",
+            country: "Nigeria",
+          },
+          clientAddress: {
+            street: "106 Kendell Street",
+            city: "Sharrington",
+            postCode: "NR24 5WQ",
+            country: "United Kingdom",
+          },
+          items: [
+            { id: randomBytes(4).toString("hex"), name: "Design", quantity: 1, price: 1800, total: 1800 },
+            { id: randomBytes(4).toString("hex"), name: "Dev", quantity: 2, price: 900, total: 1800 },
+          ],
+          total: 3600,
         },
-        clientAddress: {
-          street: "106 Kendell Street",
-          city: "Sharrington",
-          postCode: "NR24 5WQ",
-          country: "United Kingdom",
-        },
-        items: [
-          { id: randomBytes(4).toString("hex"), name: "Design", quantity: 1, price: 1800, total: 1800 },
-          { id: randomBytes(4).toString("hex"), name: "Dev", quantity: 2, price: 900, total: 1800 },
-        ],
-        total: 3600,
-      },
-    ];
-    await writeFile(DATA_FILE, JSON.stringify(sample, null, 2), "utf-8");
+      ];
+      await writeFile(DATA_FILE, JSON.stringify(sample, null, 2), "utf-8");
+    }
   }
 }
 

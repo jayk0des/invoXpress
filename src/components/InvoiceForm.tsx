@@ -103,15 +103,16 @@ export function InvoiceForm({ mode, invoice }: Props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+      const isJson = response.headers.get("content-type")?.includes("application/json");
+      const data = isJson ? ((await response.json()) as { errors?: Record<string, string>; message?: string; id?: string }) : null;
 
       if (!response.ok) {
-        const data = (await response.json()) as { errors?: Record<string, string> };
-        setErrors(data.errors ?? { form: "Something went wrong. Please try again." });
+        setErrors(data?.errors ?? { form: data?.message ?? `Request failed (${response.status}). Please try again.` });
         setSubmitting(false);
         return;
       }
 
-      const saved = (await response.json()) as Invoice;
+      const saved = data as Invoice;
       router.push(`/invoices/${saved.id}`);
       router.refresh();
     } catch {
