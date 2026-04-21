@@ -86,7 +86,7 @@ export function InvoiceForm({ mode, invoice }: Props) {
         total: Number(item.quantity) * Number(item.price),
       })),
     };
-    const strict = nextStatus !== "draft";
+    const strict = true;
     const localErrors = validateInvoice(payload, strict);
     if (Object.keys(localErrors).length > 0) {
       setErrors(localErrors as Record<string, string>);

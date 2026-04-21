@@ -84,7 +84,7 @@ export async function getInvoiceById(id: string): Promise<Invoice | null> {
 }
 
 export async function createInvoice(payload: InvoiceInput): Promise<{ invoice?: Invoice; errors?: ValidationErrors }> {
-  const strict = payload.status !== "draft";
+  const strict = true;
   const errors = validateInvoice(payload, strict);
   if (Object.keys(errors).length > 0) {
     return { errors };
@@ -116,14 +116,19 @@ export async function createInvoice(payload: InvoiceInput): Promise<{ invoice?: 
 export async function updateInvoice(
   id: string,
   payload: InvoiceInput,
-): Promise<{ invoice?: Invoice; errors?: ValidationErrors; notFound?: boolean }> {
+): Promise<{ invoice?: Invoice; errors?: ValidationErrors; notFound?: boolean; invalidTransition?: boolean }> {
   const invoices = await readInvoices();
   const index = invoices.findIndex((invoice) => invoice.id === id);
   if (index === -1) {
     return { notFound: true };
   }
+  const existing = invoices[index];
 
-  const strict = payload.status !== "draft";
+  if (existing.status === "paid" && payload.status === "draft") {
+    return { invalidTransition: true };
+  }
+
+  const strict = true;
   const errors = validateInvoice(payload, strict);
   if (Object.keys(errors).length > 0) {
     return { errors };

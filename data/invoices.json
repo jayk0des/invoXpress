@@ -1,1 +1,101 @@
-[]
+[
+  {
+    "createdAt": "2026-04-21",
+    "currency": "USD",
+    "description": "ewwewewewe",
+    "paymentTerms": 30,
+    "clientName": "334334",
+    "clientEmail": "johnsonkayode01@gmail.com",
+    "status": "paid",
+    "senderAddress": {
+      "street": "Lagos Nigeeia",
+      "city": "Agege",
+      "postCode": "100283",
+      "country": "kujjhhkjhj"
+    },
+    "clientAddress": {
+      "street": "wewewew",
+      "city": "wewew",
+      "postCode": "ewewewe",
+      "country": "wewewe"
+    },
+    "items": [
+      {
+        "id": "5a532d7e-eca6-4c68-b762-2d76a8d01d23",
+        "name": "ewew",
+        "quantity": 4,
+        "price": 1.03,
+        "total": 4.12
+      }
+    ],
+    "id": "ME7796",
+    "total": 4.12,
+    "paymentDue": "2026-05-21"
+  },
+  {
+    "createdAt": "2026-04-21",
+    "currency": "CAD",
+    "description": "ereererere",
+    "paymentTerms": 1,
+    "clientName": "rerer",
+    "clientEmail": "rererer@gmail.com",
+    "status": "paid",
+    "senderAddress": {
+      "street": "rrererer",
+      "city": "rererer",
+      "postCode": "erererere",
+      "country": "rererer"
+    },
+    "clientAddress": {
+      "street": "ererer",
+      "city": "rererer",
+      "postCode": "erere",
+      "country": "rerer"
+    },
+    "items": [
+      {
+        "id": "4fb6a4f7-ced0-407d-9de7-416c34ce7370",
+        "name": "rererer",
+        "quantity": 7,
+        "price": 1.22,
+        "total": 8.54
+      }
+    ],
+    "id": "UK3630",
+    "total": 8.54,
+    "paymentDue": "2026-04-22"
+  },
+  {
+    "createdAt": "2026-04-23",
+    "currency": "GBP",
+    "description": "fdfdfdfdffd",
+    "paymentTerms": 7,
+    "clientName": "dfdfdf",
+    "clientEmail": "dfdf@yahoo.com",
+    "status": "pending",
+    "senderAddress": {
+      "street": "fdfdfdf",
+      "city": "dfdf",
+      "postCode": "fdfd",
+      "country": "dfdfd"
+    },
+    "clientAddress": {
+      "street": "fdfdf",
+      "city": "dfdf",
+      "postCode": "dfdfdf",
+      "country": "fdfdfdfd"
+    },
+    "items": [
+      {
+        "id": "4fb6a4f7-ced0-407d-9de7-416c34ce7370",
+        "name": "fdfdfd",
+        "quantity": 7,
+        "price": 1.07,
+        "total": 7.49
+      }
+    ],
+    "id": "BN9840",
+    "total": 7.49,
+    "paymentDue": "2026-04-30"
+  }
+]

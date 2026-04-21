@@ -43,6 +43,9 @@ export async function PATCH(request: Request, context: RouteContext) {
     if (result.notFound) {
       return NextResponse.json({ message: "Invoice not found" }, { status: 404 });
     }
+    if (result.invalidTransition) {
+      return NextResponse.json({ message: "Paid invoices cannot be moved back to draft" }, { status: 400 });
+    }
     if (result.errors) {
       return NextResponse.json({ errors: result.errors }, { status: 400 });
     }
