@@ -10,6 +10,7 @@
   --color-stroke: #dfe3fa;
   --color-danger: #ec5757;
   --color-background: #f8f8fb;
+  --draft-save-text: #ffffff;
 }
 
 :root[data-theme="dark"] {
@@ -22,6 +23,7 @@
   --color-stroke: #252945;
   --color-danger: #ec5757;
   --color-background: #0c0e16;
+  --draft-save-text: #1e2139;
 }
 
 @theme inline {

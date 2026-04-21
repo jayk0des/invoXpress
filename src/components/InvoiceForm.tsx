@@ -330,7 +330,7 @@ export function InvoiceForm({ mode, invoice }: Props) {
             type="button"
             disabled={submitting}
             onClick={() => submit("draft")}
-            className="rounded-full bg-[var(--color-text)] px-5 py-3 text-sm font-semibold text-white transition hover:brightness-110 disabled:opacity-60"
+            className="draft-save-button rounded-full bg-[var(--color-text)] px-5 py-3 text-sm font-semibold text-[var(--draft-save-text)] transition hover:brightness-110 disabled:opacity-60"
           >
             Save as Draft
           </button>
