@@ -1,26 +1,62 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-brand: #7c5dfa;
+  --color-brand-secondary: #9277ff;
+  --color-surface: #ffffff;
+  --color-surface-strong: #dfe3fa;
+  --color-text: #1e2139;
+  --color-muted: #7e88c3;
+  --color-stroke: #dfe3fa;
+  --color-danger: #ec5757;
+  --color-background: #f8f8fb;
+}
+
+:root[data-theme="dark"] {
+  --color-brand: #7c5dfa;
+  --color-brand-secondary: #9277ff;
+  --color-surface: #1e2139;
+  --color-surface-strong: #252945;
+  --color-text: #dfe3fa;
+  --color-muted: #888eb0;
+  --color-stroke: #252945;
+  --color-danger: #ec5757;
+  --color-background: #0c0e16;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-league-spartan);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 80% -20%, color-mix(in srgb, var(--color-brand) 18%, transparent), transparent 40%),
+    radial-gradient(circle at -10% 20%, color-mix(in srgb, var(--color-brand-secondary) 14%, transparent), transparent 35%),
+    var(--color-background);
+  color: var(--color-text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+input:focus-visible,
+select:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
 }
